@@ -3,11 +3,12 @@
 #include <string>
 
 using namespace std;
-
+//this is compute lps array function that computes lps array which is used in kmp search
 void computeLPSArray(const string& pattern, int m, int* lps) {
     int len = 0;
     lps[0] = 0;
     int i = 1;
+    // lps[0] = 0; // lps[0] is always 0 for string with one character
     while (i < m) {
         if (pattern[i] == pattern[len]) {
             len++;
@@ -15,7 +16,7 @@ void computeLPSArray(const string& pattern, int m, int* lps) {
             i++;
         } else {
             if (len != 0) {
-                len = lps[len - 1];
+                len = lps[len - 1]; 
             } else {
                 lps[i] = 0;
                 i++;
@@ -23,7 +24,7 @@ void computeLPSArray(const string& pattern, int m, int* lps) {
         }
     }
 }
-
+//this is kunth moris pratt function that searches for pattern in text using lps array which is computed in computeLPSArray function
 void KMPSearch(const string& text, const string& pattern) {
     int n = text.length();
     int m = pattern.length();
